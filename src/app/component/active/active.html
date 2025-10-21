@@ -1,0 +1,133 @@
+<div class="container py-5">
+    <div class="mx-5 pb-2 d-flex justify-content-between">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"> 
+                    <a routerLink="/dashboard">
+                        <i class="bi bi-house-fill"></i> Dashboard 
+                    </a>
+                </li>
+                <div class="icon-divider">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                </div>
+                <li class="breadcrumb-item active" disabled>Ativos</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="mx-5 d-flex justify-content-between">
+        <div class="d-flex">
+            <div class="new-exclude-btn">
+                <button class="btn btn-success-default" (click)="addItem()">
+                    <i class="bi bi-clipboard2-plus-fill btn-wicon"></i>
+                    <span><b>Adicionar</b></span>
+                </button>
+                <button class="btn btn-danger-default"   
+                        [ngClass]="{'d-none': selectedIds.length == 0}"
+                        (click)="removeSelectedItem()">
+                    <i class="bi bi-exclude btn-wicon"></i>
+                    <span><b>Excluir</b></span>
+                </button>
+            </div>
+            <div class="info-selected pt-2"
+                    [ngClass]="{'d-none': selectedIds.length == 0}">
+                <span>{{ selectedCount }} de {{ dataSource.data.length }} selecionados</span>
+            </div>
+        </div>        
+        <h1>
+            <b>Ativos</b>
+        </h1>
+    </div>
+    <div class="mx-5 d-flex justify-content-between">
+        <div class="import-export-btn">
+            <button class="btn btn-secondary-default" (click)="exportar()">
+                <i class="bi bi-save-fill btn-wicon"></i>
+                <span><b>Exportar</b></span>
+            </button>   
+            <button 
+                (click)="uploadInput.click()" 
+                class="btn btn-secondary-default" 
+                #botaoVisual
+            >
+                <span>
+                    <b>
+                        {{ fileToUpload ? 'Arquivo Selecionado'.toUpperCase() : 'Escolher Arquivo'.toUpperCase() }}
+                    </b>
+                </span>
+            </button>
+            <input 
+                type="file" 
+                (change)="onFileSelected($event)" 
+                accept=".json" 
+                id="fileInput"
+                #uploadInput
+                class="p-2 text-center card rounded-3"
+                [hidden]="true">             
+            <button class="btn btn-secondary-default" (click)="import()">
+                <i class="bi bi-upload btn-wicon"></i>
+                <span><b>Importar</b></span>
+            </button>
+        </div>
+        <div></div>
+    </div>
+    <div class="mx-5 mt-3 p-3 text-center card rounded-3">
+        <div class="row filter-search-name">
+            <div class="search-container d-flex">
+                <label for="search" class="form-label">Filtro Beneficiário: </label>
+                <input matInput id="search" (keyup)="applyFilter($event)" placeholder="Buscar...">
+            </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" *ngIf="actives.length > 0" matSort>
+            <ng-container matColumnDef="checkbox">
+                <th mat-header-cell *matHeaderCellDef style="width:40px; padding-right: 5px">
+                    <input type="checkbox" name="" (change)="toggleSelectAll($event)" id="selectAll"> 
+                </th>
+                <td mat-cell *matCellDef="let element" style="width:40px; padding-right: 5px" class="checkbox-column"> 
+                    <input type="checkbox" name="" id=""
+                        [(ngModel)]="element.checkbox"
+                        (change)="onCheckboxChange(element, $event.target.checked)"> 
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="beneficiaryDTO"> Beneficiário </th>
+                <td mat-cell *matCellDef="let element"> {{element.beneficiaryDTO.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pagamento </th>
+                <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+                <td mat-cell *matCellDef="let element"> {{element.value | currency:'BRL':'symbol':'1.2-2'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.statusActive ? "Pago" : "Não pago"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="options">
+                <th mat-header-cell *matHeaderCellDef> Opções </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button class="btn btn-info-default d-flex justify-content-center align-items-center" (click)="editItem(element.id)">
+                        <i class="bi bi-pencil-fill"></i>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator
+            class="paginator-mat"
+            [pageSizeOptions]="[5, 10, 25]"
+            showFirstLastButtons
+            aria-label="Selecionar página">
+        </mat-paginator>
+    </div>
+</div>

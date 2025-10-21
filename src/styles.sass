@@ -1,0 +1,177 @@
+/* You can add global styles to this file, and also import other style files */
+@use './variables' as *
+
+html
+    background-color: $html-default-bgc
+    color: $html-default-cl
+
+body
+    background-color: $html-default-bgc 
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important 
+    color: $html-default-cl
+
+.btn-wicon
+    margin-right: 5px
+
+.card
+    background-color: $card-default-bgc
+    border: 1px solid $border-default-cl
+
+div
+    color: $html-default-cl
+
+table
+    background-color: $card-default-bgc
+
+th
+    text-transform: uppercase
+    font-weight: 700
+
+td, th, .icon-divider
+    color: $html-default-cl
+
+.btn span
+    font-weight: 700
+
+.btn span b
+    text-transform: uppercase
+    font-size: 14px
+
+.icon-divider svg
+    vertical-align: text-bottom
+
+.breadcrumb-item, .icon-divider
+    margin-right: 5px !important
+
+.btn-success-default
+    background-color: $success-bgc-default
+    color: $html-default-cl
+
+.btn-success-default:hover
+    color: $gray-700
+    
+.btn-info-default
+    background-color: $primary-bgc-default
+    color: $html-default-cl
+
+.btn-info-default:hover
+    color: $gray-700
+
+.btn-secondary-default
+    background-color: $secondary-bgc-default
+    color: $html-default-cl
+
+.btn-secondary-default:hover
+    color: $gray-1000
+
+.btn-danger-default
+    background-color: $danger-bgc-default
+    color: $html-default-cl
+
+.btn-danger-default:hover
+    color: $gray-1000
+
+.checkbox-column 
+  padding-left: 15px
+
+.mat-cell, .mat-header-cell
+    padding: 10px
+
+input, select, option, .filter-search-name div input
+    background: $gray-500
+    border-color: $gray-700
+    align-items: center 
+
+select::-ms-expand
+    appearance: none
+
+option
+    color: $html-default-cl
+    height: 40px
+
+option:hover
+    background-color: $primary-bgc-default
+
+.form-control, .form-select
+    color: $html-default-cl
+    height: 46px
+
+.filter-search-name div input
+    border-radius: 5px
+    background-color: $card-default-bgc
+    border: 1px solid $border-default-cl
+    color: $html-default-cl
+    height: 42px
+
+.custom-placeholder::placeholder 
+    color: $html-default-cl
+    opacity: 60%
+
+.custom-placeholder-select 
+    opacity: 60% !important
+    width: 80%;
+
+.btn-add-new > button
+    margin-left: 15px
+
+.new-exclude-btn button,
+.import-export-btn button,
+#fileInput
+    margin-right: 15px
+
+.disabled-input 
+    opacity: 0.6 !important
+
+.info-selected
+    color: $gray-900
+
+.breadcrumb-item + .breadcrumb-item::before 
+    content: '' !important
+    display: none
+    width: 1em
+    height: 1em
+    background: none
+    font-size: 1.5em
+    line-height: 1 
+    margin: 0 0.5rem 
+
+.breadcrumb-item.active 
+    color: #F0F0F0 !important
+    font-weight: 700 !important
+
+.breadcrumb-item a
+    color: #F0F0F0
+    text-decoration: none
+
+.placeholder-wrapper 
+    position: relative
+
+.placeholder-text 
+    position: absolute
+    left: 10px
+    top: 50% 
+    transform: translateY(-50%)
+    color: $html-default-cl 
+    opacity: 0.6 
+    pointer-events: none 
+
+.placeholder-text.hidden 
+    opacity: 0 
+
+select,
+::picker(select)
+    appearance: base-select
+
+.paginator-mat
+    background: $gray-500
+    border-color: $gray-700
+
+.filter-search-name div
+    align-items: baseline 
+    margin-bottom: 5px
+
+.filter-search-name div label
+    margin-right: 10px
+    
+.filter-search-name div input::placeholder
+    padding-left: 10px

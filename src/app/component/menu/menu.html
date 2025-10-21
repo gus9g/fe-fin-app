@@ -1,0 +1,26 @@
+<header class="d-flex flex-wrap justify-content-center px-5 py-3 border-bottom text-bg-dark-fin-navbar">
+    <a href="/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <span class="fs-4 text-white text-decoration-none"><b>FIN APP</b></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item" [class.active]="isActive('/dashboard')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/dashboard" disabled><i class="bi bi-house-fill btn-wicon"></i>Dashboard</a>
+      </li>
+      <li class="nav-item" [class.active]="isActive('/company')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/company"><i class="bi bi-building-fill btn-wicon"></i>Empresas</a>
+      </li>
+      <li class="nav-item" [class.active]="isActive('/bill')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/bill"><i class="bi bi-file-text-fill btn-wicon"></i>Faturas</a>
+      </li>
+      <li class="nav-item" [class.active]="isActive('/payment')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/payment"><i class="bi bi-credit-card-fill btn-wicon"></i>Pagamentos</a>
+      </li>
+      <li class="nav-item" [class.active]="isActive('/beneficiary')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/beneficiary"><i class="bi bi-people-fill btn-wicon"></i>Beneficiários</a>
+      </li>
+      <li class="nav-item" [class.active]="isActive('/active')">
+        <a class="nav-link text-white text-decoration-none" routerLink="/active"><i class="bi bi-box-seam-fill btn-wicon"></i>Ativos</a>
+      </li>
+    </ul>
+    <button class="btn btn-outline-danger ml-auto" (click)="logout()"><i class="bi bi-door-open"></i>Desconectar</button>
+</header>

@@ -1,0 +1,92 @@
+<div class="container py-5">
+    <div class="mx-5 pb-2 d-flex justify-content-between">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"> 
+                    <a routerLink="/dashboard">
+                        <i class="bi bi-house-fill"></i> Dashboard 
+                    </a>
+                </li>
+                <div class="icon-divider">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                </div>
+                <li class="breadcrumb-item">
+                    <a routerLink="/beneficiary">
+                        Beneficiários
+                    </a>
+                </li>
+                <div class="icon-divider">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                </div>
+                <li class="breadcrumb-item active" disabled>{{ isEditing ? 'Editar' : 'Adicionar' }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="mx-5 d-flex justify-content-between">
+        <div>
+        </div>
+        <h1>
+            <b>{{ isEditing ? 'Editar' : 'Adicionar' }}</b>
+        </h1>
+    </div>
+    <div class="mx-5 mt-3 p-3 text-center card rounded-3">
+        <form [formGroup]="editFormTable" action="">
+            <div class="row">
+                <div class="col-6 text-start">
+                    <label for="name" class="form-label">
+                        <span>Beneficiário </span>
+                        <span>*</span>
+                    </label>
+                    <input type="text" id="name" formControlName="name" class="form-control custom-placeholder" placeholder="Insira o nome da empresa..." />
+                    <input type="number" id="id" class="form-control d-none" formControlName="id" placeholder="Insira o nome da empresa..." />
+                </div>
+                <div class="col-6 text-start">
+                    <label for="end-date" class="form-label">Data Encerramento</label>
+                    <input type="text" id="end-date" formControlName="endDate" class="form-control custom-placeholder" placeholder="dd/mm/yyyy" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 text-start">
+                    <label for="status-id" class="form-label">Status</label>
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text" [class.hidden]="statusIdControl !== -1">Selecione...</span>    
+                        <select name="status-id" 
+                                id="status-id" 
+                                formControlName="statusId" 
+                                class="form-select">
+                            <option value="-1" disabled selected hidden></option>
+                            <option value="0">Desativado</option>
+                            <option value="1">Ativo</option>
+                            <option value="2">Atividades encerradas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6 text-start">
+                </div>
+            </div>        
+        </form>
+    </div>
+    <div class="mx-5 mt-3 d-flex justify-content-between">
+        <div></div>
+        <div class="btn-add-new">
+            <button id="return-page" (click)="returnPage()" class="btn btn-secondary-default">
+                <i class="bi bi-arrow-bar-left btn-wicon"></i>
+                <span>Voltar</span>
+            </button>
+            <button id="edit-page" (click)="editForm()" class="btn btn-success-default"  
+                [ngClass]="{'d-none': !isEditing}">
+                <i class="bi bi-disc-fill btn-wicon"></i>
+                <span>Atualizar</span>
+            </button>
+            <button id="save-page" (click)="saveForm()" class="btn btn-success-default"  
+                [ngClass]="{'d-none': isEditing}">
+                <i class="bi bi-disc-fill btn-wicon"></i>
+                <span>Salvar</span>
+            </button>
+        </div>
+    </div>
+</div>
